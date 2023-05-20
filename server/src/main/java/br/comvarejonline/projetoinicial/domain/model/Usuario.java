@@ -34,6 +34,11 @@ public class Usuario {
     private OffsetDateTime dataCadastro;
 
     @ManyToMany
+    @JoinTable(name = "usuario_produto", joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id"))
+    private Set<Produto> produtos = new HashSet<>();
+
+    @ManyToMany
     @JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "grupo_id"))
     private Set<Grupo> grupos = new HashSet<>();

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -15,7 +16,7 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "codigo_de_barra",unique = true)
+    @Column(name = "codigo_de_barra")
     private String codigoBarra;
 
     @Column(nullable = false)
@@ -26,4 +27,6 @@ public class Produto {
     
     @Column(name = "saldo_inicial")
     private Integer saldoInicial;
+    
+    private void gerarCodigo() { setCodigoBarra(UUID.randomUUID().toString()); }
 }

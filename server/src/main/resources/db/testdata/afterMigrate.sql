@@ -4,13 +4,16 @@ delete from grupo;
 delete from grupo_permissao;
 delete from permissao;
 delete from usuario;
+delete from produto;
 delete from usuario_grupo;
+delete from usuario_produto;
 
 set foreign_key_checks = 1;
 
 ALTER TABLE grupo ALTER COLUMN ID RESTART WITH 1;
 ALTER TABLE permissao ALTER COLUMN ID RESTART WITH 1;
 ALTER TABLE usuario ALTER COLUMN ID RESTART WITH 1;
+ALTER TABLE produto ALTER COLUMN ID RESTART WITH 1;
 
 
 
@@ -23,7 +26,14 @@ insert into grupo_permissao (grupo_id, permissao_id) values (1, 1), (1, 2), (2, 
 
 insert into usuario (id, nome, email, senha, data_cadastro) values
 (1, 'João da Silva', 'joao@varejonline.com.br', '123', current_timestamp),
-(2, 'Maria Joaquina', 'maria@varejonline.com.br', '123', current_timestamp);
+(2, 'Rodrigo Lima', 'rodrigo@varejonline.com.br', '123', current_timestamp),
+(3, 'Maria Joaquina', 'maria@varejonline.com.br', '123', current_timestamp);
 
-insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2);
+insert into produto (id, codigo_de_barra, nome, quantidade_minima, saldo_inicial) values (1, '1a5b21e3-64e1-4cf9-8933-387cdb6db481', 'Coca-Cola 2L', 23, 342);
+insert into produto (id, codigo_de_barra, nome, quantidade_minima, saldo_inicial) values (2, 'd997e000-5143-409e-9152-60d090d44442', 'Desodorante Monange 150ml', 65, 332);
+insert into produto (id, codigo_de_barra, nome, quantidade_minima, saldo_inicial) values (3, 'f44bdad4-f3a3-4c27-8af9-4219bcd57f80', 'Veja 500ml', 14, 144);
+
+insert into usuario_produto (usuario_id, produto_id) values (1, 1), (1, 2), (2, 3);
+
+insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 1), (2, 2), (3, 2);
 
