@@ -1,28 +1,28 @@
-<div class="login-container">
-
-  <div class="card">
-
-    <div class="card-body m-4">
-
-      <div class="header">
-        <img src="./assets/images/logo-varejo-nome.png" />
-        <h2>Entrar</h2>
-      </div>
-
-      <form (submit)="onSubmit()">
-
-        <div class="input-group mb-3">
-
-          <input type="text" class="form-control" placeholder="Usuário" autofocus>
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Senha">
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block btn-salvar">Entrar</button>
-      </form>
-
+<nav class="navbar navbar-expand-lg bg-body-tertiary" *ngIf="mostrarMenu">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><img src=".././../assets/images/logo-varejo-nome.png" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Cadastro de Produto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Cadastro de Movimentações</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Listar Movimentações</a>
+        </li>
+      </ul>
     </div>
   </div>
-</div>
+</nav>
+
+
+
+<router-outlet></router-outlet>

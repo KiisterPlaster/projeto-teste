@@ -26,11 +26,6 @@ public class HomeController {
 	}
 	
 	
-	@PostMapping
-	public Usuario create(@RequestBody Usuario usuario) {
-		return userRepository.save(usuario);
-	}
-	
 	@GetMapping
 	public List<Usuario> list() {
 		return userRepository.findAll();

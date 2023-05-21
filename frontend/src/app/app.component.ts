@@ -1,5 +1,6 @@
+import { AuthService } from './login/auth.service';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
@@ -7,27 +8,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
 
-  loginForm: FormGroup;
+  mostrarMenu: boolean = false;
 
-  constructor() { }
-
-  ngOnInit() {
-    this.createForm();
-  }
-
-  createForm() {
-
-
+  constructor(private authService: AuthService) {
 
   }
 
-  onKeepSigned() {
-
-  }
-
-  onSubmit() {
-
+  ngOnInit(){
+    this.authService.mostrarMenuEmitter.subscribe(
+      mostrar => this.mostrarMenu = mostrar
+    );
   }
 }
