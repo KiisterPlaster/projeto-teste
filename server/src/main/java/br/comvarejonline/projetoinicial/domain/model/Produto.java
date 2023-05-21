@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -28,5 +27,10 @@ public class Produto {
     @Column(name = "saldo_inicial")
     private Integer saldoInicial;
     
-    private void gerarCodigo() { setCodigoBarra(UUID.randomUUID().toString()); }
+    @PrePersist
+    private void gerarCodigoBarra() {
+        long codigoBarra = (long) (1000000000000L + Math.random() * 8999999999999L);
+        setCodigoBarra(String.valueOf(codigoBarra));
+        
+    }
 }

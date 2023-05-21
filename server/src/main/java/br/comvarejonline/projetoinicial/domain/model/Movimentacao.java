@@ -28,7 +28,7 @@ public class Movimentacao {
     private Integer quantidade;
 
     @CreationTimestamp
-    private OffsetDateTime data;
+    private OffsetDateTime dataCadastro;
 
     @Column(nullable = false)
     private String motivo;

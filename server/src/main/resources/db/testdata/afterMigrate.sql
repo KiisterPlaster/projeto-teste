@@ -29,9 +29,9 @@ insert into usuario (id, nome, email, senha, data_cadastro) values
 (2, 'Rodrigo Lima', 'rodrigo@varejonline.com.br', '123', current_timestamp),
 (3, 'Maria Joaquina', 'maria@varejonline.com.br', '123', current_timestamp);
 
-insert into produto (id, codigo_de_barra, nome, quantidade_minima, saldo_inicial) values (1, '1a5b21e3-64e1-4cf9-8933-387cdb6db481', 'Coca-Cola 2L', 23, 342);
-insert into produto (id, codigo_de_barra, nome, quantidade_minima, saldo_inicial) values (2, 'd997e000-5143-409e-9152-60d090d44442', 'Desodorante Monange 150ml', 65, 332);
-insert into produto (id, codigo_de_barra, nome, quantidade_minima, saldo_inicial) values (3, 'f44bdad4-f3a3-4c27-8af9-4219bcd57f80', 'Veja 500ml', 14, 144);
+insert into produto (id, codigo_de_barra, nome, quantidade_minima, saldo_inicial) values (1, '1532148794159', 'Coca-Cola 2L', 23, 342);
+insert into produto (id, codigo_de_barra, nome, quantidade_minima, saldo_inicial) values (2, '5164843156417', 'Desodorante Monange 150ml', 65, 332);
+insert into produto (id, codigo_de_barra, nome, quantidade_minima, saldo_inicial) values (3, '1651618919668', 'Veja 500ml', 14, 144);
 
 insert into usuario_produto (usuario_id, produto_id) values (1, 1), (1, 2), (2, 3);
 

@@ -7,8 +7,8 @@ create table produto (
 	primary key (id)
 );
 
-alter table produto add codigo_de_barra varchar(36) not null after id;
-update produto set codigo_de_barra = uuid();
+alter table produto add codigo_de_barra varchar(13) not null after id;
+update produto set codigo_de_barra = rand();
 alter table produto add constraint uk_produto_codigo_de_barra unique(codigo_de_barra);
  
 
