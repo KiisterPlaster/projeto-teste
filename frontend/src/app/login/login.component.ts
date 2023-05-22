@@ -1,9 +1,9 @@
 import { UsuarioLogin } from './../model/usuarioLogin';
 import { AuthService } from './../service/auth.service';
 import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
+import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -19,22 +19,27 @@ export class LoginComponent implements OnInit {
   usuarioLogin: UsuarioLogin = new UsuarioLogin();
 
   constructor(
+    private formBilder: FormBuilder,
+    private router: Router,
     private authService: AuthService,
     ) { }
 
   ngOnInit(): void {
-    this.createForm();
-  }
-
-  createForm() {
-  }
-
-  onKeepSigned() {
-
+    this.loginForm = this.formBilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required]]
+    });
   }
 
   onSubmit() {
-    this.authService.fazerLogin(this.usuarioLogin);
+    var dadosLogin = this.loginForm.getRawValue() as UsuarioLogin;
+    this.authService.LoginUsuario(dadosLogin).subscribe(token => {
+      var nossoToken = Token;
+    },
+    erro => {
+      //
+    }
+    )
   }
 
 }

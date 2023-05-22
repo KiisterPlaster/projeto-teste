@@ -1,14 +1,16 @@
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UsuarioLogin } from './../model/usuarioLogin';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private readonly baseURL = environment['endPoint'];
 
   private usuarioAutenticado: boolean = false;
 
@@ -17,6 +19,10 @@ export class AuthService {
   constructor(
       private http: HttpClient,
       private router: Router) { }
+
+  LoginUsuario(objeto:any) {
+    return this.http.post<any>(`${this.baseURL}/CriarTokenIndentity`, objeto);
+  }
 
   fazerLogin(usuario: UsuarioLogin) {
     if (usuario.email === 'usuario@email.com' &&
@@ -34,23 +40,10 @@ export class AuthService {
       }
   }
 
-  // entrar(usuarioLogin: UsuarioLogin): Observable<UsuarioLogin>
-  // {
-  //   return this.http.post<UsuarioLogin>('https://localhost:8081/server/usuarios/logar', usuarioLogin)
-  // }
+
 
   usuarioEstaAutenticado() {
     return this.usuarioAutenticado;
   }
-
-  // logado()
-  // {
-  //   let ok: boolean = false
-  //   if (environment.token != '')
-  //   {
-  //     ok = true
-  //   }
-  //   return ok
-  // }
 
 }
