@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.entrar(this.usuarioLogin);
+    this.authService.fazerLogin(this.usuarioLogin);
   }
 
 }

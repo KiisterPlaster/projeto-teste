@@ -1,11 +1,9 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UsuarioLogin } from './../model/usuarioLogin';
-import { Usuario } from './../model/usuario';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventEmitter } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +18,7 @@ export class AuthService {
       private http: HttpClient,
       private router: Router) { }
 
-  fazerLogin(usuario: Usuario) {
+  fazerLogin(usuario: UsuarioLogin) {
     if (usuario.email === 'usuario@email.com' &&
       usuario.senha === '123456') {
 
@@ -36,10 +34,10 @@ export class AuthService {
       }
   }
 
-  entrar(usuarioLogin: UsuarioLogin): Observable<UsuarioLogin>
-  {
-    return this.http.post<UsuarioLogin>('https://localhost:8081/server/usuarios/logar', usuarioLogin)
-  }
+  // entrar(usuarioLogin: UsuarioLogin): Observable<UsuarioLogin>
+  // {
+  //   return this.http.post<UsuarioLogin>('https://localhost:8081/server/usuarios/logar', usuarioLogin)
+  // }
 
   usuarioEstaAutenticado() {
     return this.usuarioAutenticado;
