@@ -1,4 +1,4 @@
-package br.comvarejonline.projetoinicial.api.model.view;
+package br.comvarejonline.projetoinicial.api.model;
 
 import lombok.Getter;
 import lombok.Setter;
