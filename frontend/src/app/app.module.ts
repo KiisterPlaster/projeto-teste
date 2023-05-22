@@ -11,6 +11,7 @@ import { AuthService } from './login/auth.service';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ProdutosComponent } from './produtos/produtos.component';
+import { AlertasComponent } from './alertas/alertas.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ProdutosComponent } from './produtos/produtos.component';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    ProdutosComponent
+    ProdutosComponent,
+    AlertasComponent
   ],
   imports: [
     FormsModule,

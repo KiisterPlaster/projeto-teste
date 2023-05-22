@@ -1,7 +1,11 @@
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { UsuarioLogin } from './../model/usuarioLogin';
+import { Usuario } from './../model/usuario';
 import { Injectable } from '@angular/core';
-import { Usuario } from './usuario';
 import { Router } from '@angular/router';
 import { EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +16,9 @@ export class AuthService {
 
   mostrarMenuEmitter = new EventEmitter<boolean>();
 
-  constructor(private router: Router) { }
+  constructor(
+      private http: HttpClient,
+      private router: Router) { }
 
   fazerLogin(usuario: Usuario) {
     if (usuario.email === 'usuario@email.com' &&
@@ -30,8 +36,23 @@ export class AuthService {
       }
   }
 
+  entrar(usuarioLogin: UsuarioLogin): Observable<UsuarioLogin>
+  {
+    return this.http.post<UsuarioLogin>('https://localhost:8081/server/usuarios/logar', usuarioLogin)
+  }
+
   usuarioEstaAutenticado() {
     return this.usuarioAutenticado;
   }
+
+  // logado()
+  // {
+  //   let ok: boolean = false
+  //   if (environment.token != '')
+  //   {
+  //     ok = true
+  //   }
+  //   return ok
+  // }
 
 }
