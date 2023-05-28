@@ -10,10 +10,10 @@ export class AuthNotGuard implements CanActivate{
       private authService: AuthService,
       private router: Router) { }
     canActivate(){
-      if (this.authService.logado) {
+      if (this.authService.loginUsuario) {
         return true;
       }
-      this.router.navigate(['login']);
+      this.router.navigate(['']);
       return false;
     }
 }

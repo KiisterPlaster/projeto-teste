@@ -13,23 +13,11 @@ export class AuthGuard implements CanActivate {
 
   }
   canActivate(){
-    if (this.authService.logado) {
+    if (this.authService.loginUsuario) {
       return true;
     }
-    this.router.navigate(['']);
+    this.router.navigate(['login']);
     return false;
   }
 
-  // canActivate(
-  //     route: ActivatedRouteSnapshot,
-  //     state: RouterStateSnapshot): boolean | Observable<boolean> {
-
-  //       if (this.authService.usuarioEstaAutenticado()) {
-  //         return true;
-  //       }
-
-  //       this.router.navigate(['/home']);
-
-  //       return false;
-  // }
 }

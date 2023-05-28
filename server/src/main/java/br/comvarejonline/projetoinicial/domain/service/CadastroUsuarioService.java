@@ -76,13 +76,14 @@ public class CadastroUsuarioService {
     @Transactional
     public Optional<UsuarioLoginDTO> logar(Optional<UsuarioLoginDTO> user) {
         
+       
         
         BCryptPasswordEncoder  encoder = new BCryptPasswordEncoder();
         Optional<Usuario> usuario = usuarioRepository.findByEmail(user.get().getEmail());
 
         if (usuario.isPresent()) {
             if (encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
-
+                
                 String auth = user.get().getEmail() + ":" + user.get().getSenha();
                 byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
                 String authHeader = "Basic " + new String(encodedAuth);

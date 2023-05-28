@@ -5,6 +5,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
+
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
     constructor(private authService: AuthService) {}

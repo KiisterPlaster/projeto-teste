@@ -6,12 +6,14 @@ import { LoginComponent } from './login/login.component';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { AuthGuard } from './guards/auth.guard';
 
-
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login', },
-  { path: 'login', component: LoginComponent ,},
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'cadastro-produto', component: LoginComponent, canActivate: [AuthGuard]}
+  { path: 'login', component: LoginComponent, canActivate: [AuthNotGuard]},
+  {
+    path: '', component: HomeComponent, canActivate: [AuthGuard],
+    children: [
+      { path: '', component: LoginComponent }
+    ],
+  },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

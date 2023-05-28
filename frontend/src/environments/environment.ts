@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  endPoint: "http://localhost:8081/server/usuarios/logar"
+  endPoint: "http://localhost:8081/server/usuarios/logar",
+  token: '',
+  nome: '',
+  id: 0,
 };
 
 /*

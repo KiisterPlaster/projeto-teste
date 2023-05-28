@@ -24,28 +24,7 @@ export class AuthService {
 
   loginUsuario(usuarioLogin:UsuarioLogin): Observable<UsuarioLogin> {
     return this.http.post<any>(`${this.baseURL}`, usuarioLogin);
-  }
 
-  logar(usuario: UsuarioLogin): Observable<any> {
-    return this.mockUsuarioLogin(usuario).pipe(tap((resposta) => {
-      if(!resposta.sucesso) return;
-      localStorage.setItem('token', btoa(JSON.stringify("TokenQueSeriaGeradoPelaAPI")));
-      localStorage.setItem('usuario', btoa(JSON.stringify(usuario)));
-      this.router.navigate(['']);
-    }));
-  }
-
-  private mockUsuarioLogin(usuario: UsuarioLogin): Observable<any> {
-    var retornoMock: any = [];
-    if(usuario.email === "usuario@email.com" && usuario.senha == "123"){
-      retornoMock.sucesso = true;
-      retornoMock.usuario = usuario;
-      retornoMock.token = "TokenQueSeriaGeradoPelaAPI";
-      return of(retornoMock);
-    }
-    retornoMock.sucesso = false;
-    retornoMock.usuario = usuario;
-    return of(retornoMock);
   }
 
   deslogar() {

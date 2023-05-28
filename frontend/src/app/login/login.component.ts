@@ -1,9 +1,8 @@
 import { UsuarioLogin } from './../model/usuarioLogin';
 import { AuthService } from './../service/auth.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {  FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +18,8 @@ export class LoginComponent implements OnInit {
   usuarioLogin: UsuarioLogin = new UsuarioLogin();
 
   constructor(
-    private formBilder: FormBuilder,
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
     ) { }
 
   ngOnInit(): void {
@@ -31,11 +29,19 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // onSubmit() {
+  //  this.authService.loginUsuario(this.usuarioLogin).subscribe((resp: UsuarioLogin) => {
+  //   this.usuarioLogin = resp
+
+  //   this.router.navigate(['/home'])
+
+  //  })
+  // }
+
   onSubmit() {
     var dadosLogin = this.loginForm.getRawValue() as UsuarioLogin;
-    console.log(dadosLogin)
-    this.authService.loginUsuario(dadosLogin).subscribe(token => {
-      var nossoToken = Token;
+    this.authService.loginUsuario(dadosLogin).subscribe(resp => {
+      this.router.navigate([''])
     },
     erro => {
       //

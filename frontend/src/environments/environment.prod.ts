@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  //token: '',
-  email: '',
+  token: '',
+  nome: '',
   id: 0,
 };
