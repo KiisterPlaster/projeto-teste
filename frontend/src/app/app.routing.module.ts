@@ -1,3 +1,4 @@
+import { AuthNotGuard } from './guards/auth.not.guard';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -7,8 +8,8 @@ import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login'},
-  { path: 'login', component: LoginComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'login', },
+  { path: 'login', component: LoginComponent ,},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'cadastro-produto', component: LoginComponent, canActivate: [AuthGuard]}
 ];

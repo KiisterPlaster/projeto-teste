@@ -1,8 +1,10 @@
 package br.comvarejonline.projetoinicial.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
@@ -25,7 +27,7 @@ public class Usuario {
 
     @Column(nullable = false)
     private String email;
-    
+
     @Column(nullable = false)
     private String senha;
 
@@ -57,5 +59,11 @@ public class Usuario {
 
     public void adicionarGrupo(Grupo grupo) {
         getGrupos().add(grupo);
+    }
+     
+    public void bcryptarSenha() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        
+        senha = encoder.encode(getSenha());
     }
 }

@@ -1,7 +1,7 @@
 import { UsuarioLogin } from './../model/usuarioLogin';
 import { AuthService } from './../service/auth.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Token } from '@angular/compiler';
 
@@ -25,15 +25,16 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.loginForm = this.formBilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required]]
+    this.loginForm = new FormGroup({
+      email: new FormControl(''),
+      senha: new FormControl('')
     });
   }
 
   onSubmit() {
     var dadosLogin = this.loginForm.getRawValue() as UsuarioLogin;
-    this.authService.LoginUsuario(dadosLogin).subscribe(token => {
+    console.log(dadosLogin)
+    this.authService.loginUsuario(dadosLogin).subscribe(token => {
       var nossoToken = Token;
     },
     erro => {

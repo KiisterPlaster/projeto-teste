@@ -9,15 +9,15 @@
         <h2>Entrar</h2>
       </div>
 
-      <form (submit)="onSubmit()">
+      <form [formGroup]="loginForm" (submit)="onSubmit()">
 
         <div class="input-group mb-3">
 
-          <input [(ngModel)]="usuarioLogin.email" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Usuário" autofocus>
+          <input formControlName="email" type="text" class="form-control" placeholder="usuario" autofocus>
         </div>
-    
+
         <div class="input-group mb-3">
-          <input [(ngModel)]="usuarioLogin.senha" [ngModelOptions]="{standalone: true}" type="password" class="form-control" placeholder="Senha">
+          <input formControlName="senha" type="password" class="form-control" placeholder="senha">
         </div>
 
         <button type="submit" class="btn btn-primary btn-block btn-salvar">Entrar</button>

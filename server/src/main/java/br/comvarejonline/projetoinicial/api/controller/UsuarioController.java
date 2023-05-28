@@ -2,22 +2,25 @@ package br.comvarejonline.projetoinicial.api.controller;
 
 import br.comvarejonline.projetoinicial.api.assembler.UsuarioInputDisassembler;
 import br.comvarejonline.projetoinicial.api.assembler.UsuarioModelAssembler;
+import br.comvarejonline.projetoinicial.api.model.UsuarioDTO;
 import br.comvarejonline.projetoinicial.api.model.input.SenhaInput;
 import br.comvarejonline.projetoinicial.api.model.input.UsuarioComSenhaInput;
 import br.comvarejonline.projetoinicial.api.model.input.UsuarioInput;
-import br.comvarejonline.projetoinicial.api.model.UsuarioDTO;
-import br.comvarejonline.projetoinicial.api.model.view.GrupoView;
 import br.comvarejonline.projetoinicial.domain.model.Usuario;
+import br.comvarejonline.projetoinicial.api.model.UsuarioLoginDTO;
 import br.comvarejonline.projetoinicial.domain.repository.UsuarioRepository;
 import br.comvarejonline.projetoinicial.domain.service.CadastroUsuarioService;
-import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
+
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -43,6 +46,15 @@ public class UsuarioController {
 		Usuario usuario = cadastroUsuario.buscarOuFalhar(usuarioId);
 
 		return usuarioModelAssembler.toModel(usuario);
+	}
+
+	@PostMapping("/logar")
+	public ResponseEntity<UsuarioLoginDTO> Autentication(@RequestBody Optional<UsuarioLoginDTO> user) {
+		
+		
+		
+		return cadastroUsuario.logar(user).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 
 	@PostMapping

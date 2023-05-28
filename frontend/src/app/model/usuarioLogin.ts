@@ -1,6 +1,7 @@
 export class UsuarioLogin
 {
-  email!: string;
-  senha!: string;
+  public id: string;
+  public email: string;
+  public senha: string;
 
 }

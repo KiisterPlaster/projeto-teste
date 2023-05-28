@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  endPoint: "http://localhost:8081/server"
+  endPoint: "http://localhost:8081/server/usuarios/logar"
 };
 
 /*

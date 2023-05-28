@@ -1,4 +1,6 @@
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 import { UsuarioLogin } from './../model/usuarioLogin';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -20,30 +22,75 @@ export class AuthService {
       private http: HttpClient,
       private router: Router) { }
 
-  LoginUsuario(objeto:any) {
-    return this.http.post<any>(`${this.baseURL}/CriarTokenIndentity`, objeto);
+  loginUsuario(usuarioLogin:UsuarioLogin): Observable<UsuarioLogin> {
+    return this.http.post<any>(`${this.baseURL}`, usuarioLogin);
   }
 
-  fazerLogin(usuario: UsuarioLogin) {
-    if (usuario.email === 'usuario@email.com' &&
-      usuario.senha === '123456') {
-
-        this.usuarioAutenticado = true;
-
-        this.mostrarMenuEmitter.emit(true);
-
-        this.router.navigateByUrl("/home")
-      } else {
-        this.usuarioAutenticado = false;
-
-        this.mostrarMenuEmitter.emit(false);
-      }
+  logar(usuario: UsuarioLogin): Observable<any> {
+    return this.mockUsuarioLogin(usuario).pipe(tap((resposta) => {
+      if(!resposta.sucesso) return;
+      localStorage.setItem('token', btoa(JSON.stringify("TokenQueSeriaGeradoPelaAPI")));
+      localStorage.setItem('usuario', btoa(JSON.stringify(usuario)));
+      this.router.navigate(['']);
+    }));
   }
 
-
-
-  usuarioEstaAutenticado() {
-    return this.usuarioAutenticado;
+  private mockUsuarioLogin(usuario: UsuarioLogin): Observable<any> {
+    var retornoMock: any = [];
+    if(usuario.email === "usuario@email.com" && usuario.senha == "123"){
+      retornoMock.sucesso = true;
+      retornoMock.usuario = usuario;
+      retornoMock.token = "TokenQueSeriaGeradoPelaAPI";
+      return of(retornoMock);
+    }
+    retornoMock.sucesso = false;
+    retornoMock.usuario = usuario;
+    return of(retornoMock);
   }
+
+  deslogar() {
+    localStorage.clear();
+    this.router.navigate(['login']);
+}
+get obterUsuarioLogado(): UsuarioLogin {
+  return localStorage.getItem('usuario')
+    ? JSON.parse(atob(localStorage.getItem('usuario')))
+    : null;
+}
+get obterIdUsuarioLogado(): string {
+  return localStorage.getItem('usuario')
+    ? (JSON.parse(atob(localStorage.getItem('usuario'))) as UsuarioLogin).id
+    : null;
+}
+get obterTokenUsuario(): string {
+  return localStorage.getItem('token')
+    ? JSON.parse(atob(localStorage.getItem('token')))
+    : null;
+}
+get logado(): boolean {
+  return localStorage.getItem('token') ? true : false;
+}
+
+  // fazerLogin(usuario: UsuarioLogin) {
+  //   if (usuario.email === 'usuario@email.com' &&
+  //     usuario.senha === '123456') {
+
+  //       this.usuarioAutenticado = true;
+
+  //       this.mostrarMenuEmitter.emit(true);
+
+  //       this.router.navigateByUrl("/home")
+  //     } else {
+  //       this.usuarioAutenticado = false;
+
+  //       this.mostrarMenuEmitter.emit(false);
+  //     }
+  // }
+
+
+
+  // usuarioEstaAutenticado() {
+  //   return this.usuarioAutenticado;
+  // }
 
 }
